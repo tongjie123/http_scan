@@ -64,7 +64,7 @@ class HttpLog:
                     # 信息行元素0为发送时间
                     http.send_time = info_row_split[0]
                     # 信息行元素1为url
-                    http.u = Url(info_row_split[1])
+                    http.set_byUrl(info_row_split[1])
                     # 信息行元素2如果存在，为ip
                     if len(info_row_split) == 3:
                         http.id = info_row_split[2][2:-2]
@@ -114,7 +114,7 @@ class HttpLog:
             http = Http()
             item = items[i]
             # url
-            http.u = Url(item.find('url').text)
+            http.set_byUrl(item.find('url').text)
             # 设置ip
             http.ip = item.find('host').get('ip')
             # 请求报文，该值是base64编码，解码为字节后交给Http方法处理
@@ -143,7 +143,7 @@ class HttpLog:
                 # 响应时延，为0表示不确定
                 http.wait_time = 0
                 # 设置url
-                http.u = Url(df.loc[i]['URL'])
+                http.set_byUrl(df.loc[i]['URL'])
                 # ip
                 http.ip = df.loc[i]['IP']
                 # 请求报文，该值是base64编码，解码为字节后交给Http方法处理

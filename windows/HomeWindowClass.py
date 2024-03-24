@@ -1,5 +1,5 @@
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QMainWindow, QTabWidget, QAction, QFileDialog
+from PyQt5.QtWidgets import QMainWindow, QTabWidget, QAction, QFileDialog, QMessageBox
 from PyQt5.uic import loadUi
 
 from entity.http.HttpLogClass import HttpLog
@@ -59,5 +59,6 @@ class HomeWindow:
                 http_list = httpLog.read(log_filePath)
                 for i in range(len(http_list)):
                     self.httpService.insert(http_list[i])
+            QMessageBox.information(self.window, '提示', '导入完成')
         elif act.text() == '数据库':
             pass

@@ -93,4 +93,5 @@ class LogWindow:
     def treeWidget_itemClicked(self, item: QTreeWidgetItem, column: int):
         url_pre = QTreeWidgetModule.treeWidget_getPath(item)
         print(url_pre)
-        self.logFilter_window.show_filter_with('url like "'+url_pre+'%%"')
+        # 拒绝http://www.baidu.com/abc匹配到http://www.baidu.com/abcdefg
+        self.logFilter_window.show_filter_with('url regexp "'+url_pre+'(/|$|\\\\?)"')

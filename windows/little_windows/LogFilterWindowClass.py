@@ -56,7 +56,13 @@ class LogFilterWindow:
     def show_filter_with(self, with_where: str):
         self.window.plainTextEdit_2: QPlainTextEdit
         sql = self.window.plainTextEdit_2.toPlainText()
+        # 拆解sql语句，在where处添加自定义的结构
         if 'where' in sql:
             sql = sql.replace('where', 'where %s and ' % with_where)
             http_list = self.httpService.select_list_bySql(sql)
             self.parent_window.logTable_window.show_http_list(http_list)
+        else:
+            sql = sql + ' where ' + with_where
+            http_list = self.httpService.select_list_bySql(sql)
+            self.parent_window.logTable_window.show_http_list(http_list)
+            

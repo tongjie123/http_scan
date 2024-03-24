@@ -43,6 +43,7 @@ class HttpDb:
 
     def select_list_bySql(self, sql: str):
         self.baseDb.execute(sql=sql)
+        print(sql)
         result = self.baseDb.cursor.fetchall()
         http_list = list()
         for row in result:
